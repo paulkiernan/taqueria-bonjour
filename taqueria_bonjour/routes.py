@@ -19,33 +19,35 @@ from taqueria_bonjour.helpers import _send_message
 
 RESPONSE_COUNTER = Counter()
 POTENTIAL_RESPONSES = [
-    'Bonjour, {person}?',
-    'Bonjour, {person}!',
-    'Bonjour, {person}.',
-    'Bonjour, {person}...',
-    '¡Bonjour, {person}!',
-    '¿Bonjour, {person}?',
-    '¡Bonjour, {person}?',
-    '¿Bonjour, {person}!',
-    '#Bonjour, {person}',
-    '∴Bonjour, {person}',
+    "Bonjour, {person}?",
+    "Bonjour, {person}!",
+    "Bonjour, {person}.",
+    "Bonjour, {person}...",
+    "¡Bonjour, {person}!",
+    "¿Bonjour, {person}?",
+    "¡Bonjour, {person}?",
+    "¿Bonjour, {person}!",
+    "#Bonjour, {person}",
+    "∴Bonjour, {person}",
 ]
 SPECIAL_RESPONSES = [
-    'Pamplemousse, {person}!',
-    'Sacre le bleu, {person}!',
+    "Pamplemousse, {person}!",
+    "Sacre le bleu, {person}!",
 ]
 
 
-@app.route('/', methods=['GET'])
+@app.route("/", methods=["GET"])
 def index():
-    return 'Bonjour'
+    return "Bonjour"
 
 
-@app.route('/sms', methods=['GET', 'POST'])
+@app.route("/sms", methods=["GET", "POST"])
 def sms():
 
-    number = request.form.get('From')
-    responder = User.query.filter_by(phone_number=PhoneNumber(number, 'US')).one()
+    number = request.form.get("From")
+    responder = User.query.filter_by(
+        phone_number=PhoneNumber(number, "US")
+    ).one()
     logging.info("Received message from: {0}".format(number))
     responder.responses += 1
     db.session.commit()
@@ -59,7 +61,7 @@ def sms():
     logging.info("That person is: {0}".format(responder.name))
 
     total_message = message.format(person=responder.name)
-    if responder.name == 'stranger':
+    if responder.name == "stranger":
         total_message += (
             "\n\nPS: Don't be a stranger! Sign up for the forthcoming radical new "
             "concept in food at http://www.taqueriabonjour.com"
@@ -70,50 +72,50 @@ def sms():
     return str(resp)
 
 
-@app.route('/bonjour', methods=['GET'])
+@app.route("/bonjour", methods=["GET"])
 def meow():
     for user in User.query.all():
         _send_message(twilio_client, user.name, user.phone_number.e164)
-    return 'Bonjours sent.'
+    return "Bonjours sent."
 
 
-@app.route('/add', methods=['POST'])
+@app.route("/add", methods=["POST"])
 def add():
-    name = request.form['name']
-    phone_number = request.form['number']
-    code = request.form.get('code', 'US')
+    name = request.form["name"]
+    phone_number = request.form["number"]
+    code = request.form.get("code", "US")
 
-    u = User(
-        name=name,
-        phone_number=PhoneNumber(phone_number, code)
-    )
+    u = User(name=name, phone_number=PhoneNumber(phone_number, code))
     db.session.add(u)
     db.session.commit()
 
-    return {
-        "msg": f"Added {u}",
-        "status": "ok"
-    }
+    return {"msg": f"Added {u}", "status": "ok"}
 
 
-@app.route('/team', methods=['GET'])
+@app.route("/team", methods=["GET"])
 def team():
-    return json.dumps([
-        {
-            'id': user.id,
-            'name': user.name,
-            'phone_number': user.phone_number.e164
-        }
-        for user in User.query.all()
-    ])
+    return json.dumps(
+        [
+            {
+                "id": user.id,
+                "name": user.name,
+                "phone_number": user.phone_number.e164,
+            }
+            for user in User.query.all()
+        ]
+    )
 
 
-@app.route('/speak', methods=['POST'])
+@app.route("/speak", methods=["POST"])
 def speak():
-    number = request.form.get('From')
+    number = request.form.get("From")
     response = VoiceResponse()
     try:
-        name = User.query.filter_by(phone_number=PhoneNumber(number, 'US')).one().name
+        name = (
+            User.query.filter_by(phone_number=PhoneNumber(number, "US"))
+            .one()
+            .name
+        )
     except NoResultFound:
         name = "stranger"
     response.say("Bonjour, {0}!".format(name))

@@ -91,7 +91,7 @@ def add():
     db.session.commit()
 
     return {
-        "msg": "Added {u}",
+        "msg": f"Added {u}",
         "status": "ok"
     }
 

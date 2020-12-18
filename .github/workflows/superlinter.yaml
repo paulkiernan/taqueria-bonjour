@@ -17,9 +17,8 @@ jobs:
         env:
           DEFAULT_BRANCH: main
           OUTPUT_DETAILS: detailed
-          PYTHON_BLACK_CONFIG_FILE: pyproject.toml
           VALIDATE_ALL_CODEBASE: true
-          VALIDATE_PYTHON_BLACK: true
+          VALIDATE_PYTHON: true
           VALIDATE_DOCKERFILE: true
           VALIDATE_JSON: true
           VALIDATE_YAML: true

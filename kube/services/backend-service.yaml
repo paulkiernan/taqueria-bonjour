@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: taqueria-bonjour-service
+spec:
+  selector:
+    app: taqueria-bonjour
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000

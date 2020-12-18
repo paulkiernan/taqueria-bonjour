@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taqueria-bonjour-deployment
+  labels:
+    app: taqueria-bonjour
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: taqueria-bonjour
+  template:
+    metadata:
+      labels:
+        app: taqueria-bonjour
+    spec:
+      containers:
+      - name: taqueria-bonjour
+        image: paulynomial/taqueria-bonjour:latest
+        imagePullPolicy: Always
+        env:
+        - name: TWILIO_ACCOUNT_SID
+          valueFrom:
+            secretKeyRef:
+              name: taqueria-bonjour-twilio
+              key: twilio_account_sid
+        - name: TWILIO_AUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: taqueria-bonjour-twilio
+              key: twilio_auth_token
+        ports:
+        - containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
+          initialDelaySeconds: 3
+          periodSeconds: 3

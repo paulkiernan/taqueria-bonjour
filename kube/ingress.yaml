@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    field.cattle.io/description: Ingress for main personal website splash page
+  name: taqueria-bonjour-ingress
+  namespace: taqueria-bonjour
+spec:
+  rules:
+  - host: bonjour.paulynomial.com
+    http:
+      paths:
+      - backend:
+          serviceName: taqueria-bonjour-service
+          servicePort: 5000
+        path: /
+        pathType: Prefix

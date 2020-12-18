@@ -13,8 +13,7 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 twilio_client = TwilioClient(
-    app.config['TWILIO_ACCOUNT_SID'],
-    app.config['TWILIO_AUTH_TOKEN']
+    app.config["TWILIO_ACCOUNT_SID"], app.config["TWILIO_AUTH_TOKEN"]
 )
 
 from taqueria_bonjour import routes, models  # noqa
@@ -24,5 +23,5 @@ def main():
     return app
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main().run(host="0.0.0.0", debug=True)

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: taqueria-bonjour
-        image: paulynomial/taqueria-bonjour:latest
+        image: docker.pkg.github.com/paulkiernan/taqueria-bonjour/taqueria-bonjour:v0.0.1
         imagePullPolicy: Always
         env:
         - name: FLASK_APP

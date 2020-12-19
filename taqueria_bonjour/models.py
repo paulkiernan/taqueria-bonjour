@@ -15,10 +15,7 @@ class User(db.Model):
     _phone_number = db.Column(db.Unicode(20), index=True, unique=True)
     country_code = db.Column(db.Unicode(8), default="US")
     sends = db.Column(db.Integer, default=0)
-    responses = db.Column(
-        db.Integer,
-        default=0
-    )
+    responses = db.Column(db.Integer, default=0)
 
     phone_number = db.composite(PhoneNumber, _phone_number, country_code)
 

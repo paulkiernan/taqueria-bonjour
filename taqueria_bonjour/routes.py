@@ -42,7 +42,7 @@ def index():
 
 
 @app.route("/healthz", methods=["GET"])
-def index():
+def healthcheck():
     return "healthy"
 
 

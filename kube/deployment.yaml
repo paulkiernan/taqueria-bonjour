@@ -6,6 +6,7 @@ metadata:
     app: taqueria-bonjour
 spec:
   replicas: 2
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app: taqueria-bonjour
@@ -16,7 +17,7 @@ spec:
     spec:
       containers:
       - name: taqueria-bonjour
-        image: docker.pkg.github.com/paulkiernan/taqueria-bonjour/taqueria-bonjour:v0.0.1
+        image: ghcr.io/paulkiernan/taqueria-bonjour/taqueria-bonjour:v0.0.1
         imagePullPolicy: Always
         env:
         - name: FLASK_APP

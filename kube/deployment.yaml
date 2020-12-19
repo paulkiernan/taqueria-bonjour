@@ -17,13 +17,13 @@ spec:
     spec:
       containers:
       - name: taqueria-bonjour
-        image: ghcr.io/paulkiernan/taqueria-bonjour:0.0.3
+        image: ghcr.io/paulkiernan/taqueria-bonjour:0.0.4
         imagePullPolicy: Always
         env:
         - name: FLASK_APP
           value: taqueria_bonjour:main
         - name: DATABASE_URL
-          value: /mnt/taqueria-bonjour/taco.db
+          value: sqlite:////mnt/taqueria-bonjour/taco.db
         - name: TWILIO_ACCOUNT_SID
           valueFrom:
             secretKeyRef:

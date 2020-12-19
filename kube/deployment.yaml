@@ -19,27 +19,34 @@ spec:
         image: paulynomial/taqueria-bonjour:latest
         imagePullPolicy: Always
         env:
+        - name: FLASK_APP
+          value: taqueria_bonjour:main
         - name: TWILIO_ACCOUNT_SID
           valueFrom:
             secretKeyRef:
               name: taqueria-bonjour-twilio
-              key: twilio_account_sid
+              key: account_sid
         - name: TWILIO_AUTH_TOKEN
           valueFrom:
             secretKeyRef:
               name: taqueria-bonjour-twilio
-              key: twilio_auth_token
+              key: auth_token
+        - name: TWILIO_ORIGIN_NUMBER
+          valueFrom:
+            secretKeyRef:
+              name: taqueria-bonjour-twilio
+              key: origin_number
         ports:
-        - containerPort: 5000
+        - containerPort: 8080
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 5000
+            port: 8080
           initialDelaySeconds: 5
           periodSeconds: 10
         readinessProbe:
           httpGet:
             path: /healthz
-            port: 5000
+            port: 8080
           initialDelaySeconds: 3
           periodSeconds: 3

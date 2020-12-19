@@ -41,6 +41,11 @@ def index():
     return "Bonjour"
 
 
+@app.route("/healthz", methods=["GET"])
+def index():
+    return "healthy"
+
+
 @app.route("/sms", methods=["GET", "POST"])
 def sms():
 

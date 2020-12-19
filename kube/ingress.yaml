@@ -12,6 +12,6 @@ spec:
       paths:
       - backend:
           serviceName: taqueria-bonjour-service
-          servicePort: 5000
+          servicePort: 8080
         path: /
         pathType: Prefix

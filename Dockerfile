@@ -8,4 +8,4 @@ RUN mkdir /storage
 WORKDIR /src
 COPY . /src
 
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["waitress-serve", "--call", "taqueria_bonjour:main"]

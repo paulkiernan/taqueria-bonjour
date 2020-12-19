@@ -11,5 +11,5 @@ docker run \
     -p 8080:8080 \
     -e TWILIO_ACCOUNT_SID=$(sops -d --extract '["twilio_account_sid"]' secrets/twilio.yaml) \
     -e TWILIO_AUTH_TOKEN=$(sops -d --extract '["twilio_auth_token"]' secrets/twilio.yaml) \
-    -it taqueria-bonjour:latest \
-        waitress-serve --call taqueria_bonjour:main
+    -e TWILIO_ORIGIN_NUMBER=$(sops -d --extract '["origin_number"]' secrets/twilio.yaml) \
+    -it taqueria-bonjour:latest

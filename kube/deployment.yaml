@@ -22,6 +22,8 @@ spec:
         env:
         - name: FLASK_APP
           value: taqueria_bonjour:main
+        - name: DATABASE_URL
+          value: /mnt/taqueria-bonjour/taco.db
         - name: TWILIO_ACCOUNT_SID
           valueFrom:
             secretKeyRef:
@@ -51,3 +53,10 @@ spec:
             port: 8080
           initialDelaySeconds: 3
           periodSeconds: 3
+        volumeMounts:
+        - name: sqlite-vol
+          mountPath: /mnt/taqueria-bonjour
+      volumes:
+      - name: sqlite-vol
+        persistentVolumeClaim:
+          claimName: taqueria-bonjour-sqlite-pvc

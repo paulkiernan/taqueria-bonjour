@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: taqueria-bonjour
-        image: ghcr.io/paulkiernan/taqueria-bonjour/taqueria-bonjour:v0.0.1
+        image: ghcr.io/paulkiernan/taqueria-bonjour:0.0.2
         imagePullPolicy: Always
         env:
         - name: FLASK_APP

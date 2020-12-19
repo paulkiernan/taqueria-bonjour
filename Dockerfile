@@ -1,5 +1,5 @@
 FROM python:3.9-alpine
-LABEL org.opencontainers.image.source https://github.com/paulkiernan/taqueria-bonjour
+LABEL org.opencontainers.image.source=https://github.com/paulkiernan/taqueria-bonjour
 
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt

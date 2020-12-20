@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import json
 import logging
 import random
 from collections import Counter
@@ -99,8 +98,8 @@ def add():
 
 @app.route("/team", methods=["GET"])
 def team():
-    return json.dumps(
-        [
+    return {
+        "data": [
             {
                 "id": user.id,
                 "name": user.name,
@@ -108,7 +107,7 @@ def team():
             }
             for user in User.query.all()
         ]
-    )
+    }
 
 
 @app.route("/speak", methods=["POST"])

@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:13.12.0-alpine
+FROM node:15.4.0-alpine3.10
 
 # set working directory
 WORKDIR /src
@@ -8,9 +8,9 @@ WORKDIR /src
 ENV PATH /src/node_modules/.bin:$PATH
 
 # install src dependencies
-COPY package*.json ./
-RUN npm install
-RUN npm install react-scripts@3.4.1 -g
+COPY package.json ./
+COPY yarn.lock ./
+RUN yarn install
 
 # add src
 COPY . ./

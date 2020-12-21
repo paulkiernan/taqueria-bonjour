@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: taqueria-bonjour-frontend-service
+spec:
+  selector:
+    app: taqueria-bonjour-frontend
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

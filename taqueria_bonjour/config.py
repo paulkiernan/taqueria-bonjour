@@ -10,9 +10,7 @@ class Config(object):
     if os.environ.get("DATABASE_URL"):
         SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     else:
-        SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
-            os.path.abspath(os.path.dirname(__file__)), "taco.db"
-        )
+        SQLALCHEMY_DATABASE_URI = "sqlite:////src/storage/taco.db"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Twilio Auth

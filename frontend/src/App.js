@@ -9,7 +9,7 @@ function App() {
         <p
           className="App-link"
         >
-          a radical new concept in food
+          a forthcoming radical new concept in food
         </p>
       </header>
     </div>

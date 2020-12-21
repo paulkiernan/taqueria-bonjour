@@ -5,7 +5,7 @@ import logging
 import random
 from collections import Counter
 
-from flask import request
+from flask import request, render_template
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy_utils import PhoneNumber
 from twilio.twiml.messaging_response import MessagingResponse
@@ -37,7 +37,7 @@ SPECIAL_RESPONSES = [
 
 @app.route("/", methods=["GET"])
 def index():
-    return "Bonjour"
+    return render_template("index.html")
 
 
 @app.route("/healthz", methods=["GET"])

@@ -8,7 +8,12 @@ from twilio.rest import Client as TwilioClient
 
 from taqueria_bonjour.config import Config
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_folder="../frontend/build/static",
+    template_folder="../frontend/build"
+)
+
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)

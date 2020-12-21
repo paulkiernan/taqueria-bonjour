@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: taqueria-bonjour-deployment
+  name: backend
   labels:
     app: taqueria-bonjour
 spec:
@@ -16,7 +16,7 @@ spec:
         app: taqueria-bonjour
     spec:
       containers:
-      - name: taqueria-bonjour
+      - name: backend
         image: ghcr.io/paulkiernan/taqueria-bonjour:0.0.5
         imagePullPolicy: Always
         env:
@@ -27,17 +27,17 @@ spec:
         - name: TWILIO_ACCOUNT_SID
           valueFrom:
             secretKeyRef:
-              name: taqueria-bonjour-twilio
+              name: twilio
               key: account_sid
         - name: TWILIO_AUTH_TOKEN
           valueFrom:
             secretKeyRef:
-              name: taqueria-bonjour-twilio
+              name: twilio
               key: auth_token
         - name: TWILIO_ORIGIN_NUMBER
           valueFrom:
             secretKeyRef:
-              name: taqueria-bonjour-twilio
+              name: twilio
               key: origin_number
         ports:
         - containerPort: 8080
@@ -59,4 +59,4 @@ spec:
       volumes:
       - name: sqlite-vol
         persistentVolumeClaim:
-          claimName: taqueria-bonjour-sqlite-pvc
+          claimName: sqlite-pvc

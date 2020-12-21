@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: taqueria-bonjour-frontend-deployment
+  name: frontend
   labels:
-    app: taqueria-bonjour-frontend
+    app: taqueria-bonjour
 spec:
   replicas: 2
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: taqueria-bonjour-frontend
+      app: taqueria-bonjour
   template:
     metadata:
       labels:
-        app: taqueria-bonjour-frontend
+        app: taqueria-bonjour
     spec:
       containers:
-      - name: taqueria-bonjour
+      - name: frontend
         image: ghcr.io/paulkiernan/taqueria-bonjour-frontend:0.0.1
         imagePullPolicy: Always
         ports:

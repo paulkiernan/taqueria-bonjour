@@ -1,12 +1,14 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: taqueria-bonjour-sqlite-pvc
+  name: sqlite-pvc
+  labels:
+    app: taqueria-bonjour
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 1Gi
-  volumeName: taqueria-bonjour-sqlite-pv
+  volumeName: sqlite-pv
   storageClassName: longhorn

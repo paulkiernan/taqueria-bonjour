@@ -1,7 +1,9 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: taqueria-bonjour-service
+  name: backend
+  labels:
+    app: taqueria-bonjour
 spec:
   selector:
     app: taqueria-bonjour

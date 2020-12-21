@@ -4,20 +4,23 @@ metadata:
   annotations:
     cert-manager.io/issuer: letsencrypt-prod
     cert-manager.io/issuer-kind: ClusterIssuer
-    field.cattle.io/description: Frontend ingress for main personal website splash page
-  name: taqueria-bonjour-frontend-ingress
+    field.cattle.io/description: Backend ingress for main personal website splash page
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: backend
   namespace: taqueria-bonjour
+  labels:
+    app: taqueria-bonjour
 spec:
   rules:
   - host: bonjour.paulynomial.com
     http:
       paths:
-      - path: /
+      - path: /api(/|$)(.*)
         pathType: Prefix
         backend:
-          serviceName: taqueria-bonjour-frontend-service
-          servicePort: 80
+          serviceName: backend
+          servicePort: 8080
   tls:
   - hosts:
     - bonjour.paulynomial.com
-    secretName: taqueria-bonjour-frontend-ingress-prod-tls
+    secretName: backend-ingress-prod-tls

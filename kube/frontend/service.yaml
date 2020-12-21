@@ -1,10 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: taqueria-bonjour-frontend-service
+  name: frontend
+  labels:
+    app: taqueria-bonjour
 spec:
   selector:
-    app: taqueria-bonjour-frontend
+    app: taqueria-bonjour
   type: NodePort
   ports:
     - protocol: TCP

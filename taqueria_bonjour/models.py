@@ -13,7 +13,7 @@ class User(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.Unicode(255), index=True, unique=True)
     _phone_number = db.Column(db.Unicode(20), index=True, unique=True)
-    country_code = db.Column(db.Unicode(8), default="US")
+    country_code = db.Column(db.Unicode(8))
     sends = db.Column(db.Integer, default=0)
     responses = db.Column(db.Integer, default=0)
 

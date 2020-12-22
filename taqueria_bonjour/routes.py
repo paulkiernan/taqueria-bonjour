@@ -6,6 +6,7 @@ import random
 from collections import Counter
 
 from flask import request, render_template
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy_utils import PhoneNumber
 from twilio.twiml.messaging_response import MessagingResponse
@@ -37,7 +38,7 @@ SPECIAL_RESPONSES = [
 
 @app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    return "bonjour"
 
 
 @app.route("/healthz", methods=["GET"])
@@ -85,15 +86,25 @@ def meow():
 
 @app.route("/add", methods=["POST"])
 def add():
-    name = request.form["name"]
-    phone_number = request.form["number"]
-    code = request.form.get("code", "US")
 
-    u = User(name=name, phone_number=PhoneNumber(phone_number, code))
+    post_data = request.get_json()
+
+    u = User(
+        name=post_data["name"],
+        phone_number=PhoneNumber(
+            post_data["number"],
+            post_data["code"].upper()
+        )
+    )
     db.session.add(u)
-    db.session.commit()
 
-    return {"msg": f"Added {u}", "status": "ok"}
+    try:
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        return {"message": "That name or number already exists!", "status": "error"}
+
+    return {"message": f"Successfully added {u.name}!", "status": "success"}
 
 
 @app.route("/team", methods=["GET"])

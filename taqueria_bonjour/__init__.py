@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask
+from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from twilio.rest import Client as TwilioClient
@@ -15,6 +16,9 @@ migrate = Migrate(app, db)
 twilio_client = TwilioClient(
     app.config["TWILIO_ACCOUNT_SID"], app.config["TWILIO_AUTH_TOKEN"]
 )
+
+# TODO: Setup CORS to actually use secrets
+CORS(app)
 
 from taqueria_bonjour import routes, models  # noqa
 

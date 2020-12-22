@@ -6,12 +6,12 @@ on:
       - main
 
     tags:
-      - v*
+      - frontend-v*
 
   pull_request:
 
 env:
-  IMAGE_NAME: taqueria-bonjour
+  IMAGE_NAME: taqueria-bonjour-backend
 
 jobs:
   test:

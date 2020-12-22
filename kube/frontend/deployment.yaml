@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: ghcr.io/paulkiernan/taqueria-bonjour-frontend:1.0.2
+        image: ghcr.io/paulkiernan/taqueria-bonjour-frontend:1.0.3
         imagePullPolicy: Always
         ports:
         - containerPort: 80

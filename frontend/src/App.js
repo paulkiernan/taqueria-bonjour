@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Typography from '@material-ui/core/Typography';
 
 import Header from './components/Header';
 import SubscribeDialog from './components/SubscribeDialog';
+import { initGA, PageView } from './components/Tracking';
 
 import './App.css';
 import logo from './taco.svg';
 
-export default function App() {
+initGA('UA-41647925-5');
+
+const App = () => {
+  useEffect(() => {
+    PageView();
+  });
+
   return (
     <div className="App">
       <Header />
@@ -28,4 +35,6 @@ export default function App() {
       </header>
     </div>
   );
-}
+};
+
+export default App;

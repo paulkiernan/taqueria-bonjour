@@ -1,5 +1,8 @@
 import React from 'react';
 
+import 'react-phone-input-2/lib/material.css';
+import 'yup-phone';
+import * as Yup from 'yup';
 import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -7,15 +10,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import PhoneInput from 'react-phone-input-2';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-
 import { Formik } from 'formik';
-import * as Yup from 'yup';
-import 'yup-phone';
 
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/material.css';
+import { Event, Exception } from '../Tracking';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -34,14 +34,18 @@ export default function SubscribeDialog() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
+    Event('SUBSCRIBE', 'open', 'SubscribeDialog');
     setOpen(true);
   };
 
   const handleClose = () => {
+    Event('SUBSCRIBE', 'close', 'SubscribeDialog');
     setOpen(false);
   };
 
   const submitApiRequest = (values, actions) => {
+    Event('SUBSCRIBE', 'submit', 'SubscribeDialog');
+
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -60,6 +64,7 @@ export default function SubscribeDialog() {
           // get error message from body or default to response status
           const error = (data && data.message) || response.status;
           actions.setStatus([data.status, data.message]);
+          Exception(data.message, false);
           return Promise.reject(error);
         }
 
@@ -70,6 +75,7 @@ export default function SubscribeDialog() {
       .catch((error) => {
         console.log(error);
         actions.setStatus(['error', 'Error submitting information to server!']);
+        Exception(error, true);
         actions.setSubmitting(false);
       });
   };

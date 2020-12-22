@@ -12,6 +12,8 @@ docker run \
     -e VALIDATE_DOCKERFILE=true \
     -e VALIDATE_JSON=true \
     -e VALIDATE_PYTHON=true \
+    -e VALIDATE_JAVASCRIPT_ES=true \
+    -e VALIDATE_JSX=true \
     -e VALIDATE_YAML=true \
     -v "$REPO_ROOT_DIR":/tmp/lint \
     github/super-linter

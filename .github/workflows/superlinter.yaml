@@ -21,5 +21,7 @@ jobs:
           VALIDATE_PYTHON: true
           VALIDATE_DOCKERFILE: true
           VALIDATE_JSON: true
+          VALIDATE_JSX: true
+          VALIDATE_JAVASCRIPT_EX: true
           VALIDATE_YAML: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,26 +1,31 @@
-import { Helmet } from 'react-helmet'
+import React from 'react';
 
-import logo from './taco.svg';
+import Typography from '@material-ui/core/Typography';
+
+import Header from './components/Header';
+import SubscribeDialog from './components/SubscribeDialog';
+
 import './App.css';
+import logo from './taco.svg';
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Taqueria Bonjour</title>
-        <link rel="canonical" href="http://bonjour.paulynomial.com/" />
-      </Helmet>
+      <Header />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p
-          className="App-link"
+        <Typography
+          variant="h3"
+          gutterBottom
+          style={{
+            fontFamily: 'PermanentMarker',
+            marginTop: '7vmin',
+          }}
         >
           a forthcoming radical new concept in food
-        </p>
+        </Typography>
+        <SubscribeDialog />
       </header>
     </div>
   );
 }
-
-export default App;

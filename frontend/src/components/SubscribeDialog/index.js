@@ -161,10 +161,12 @@ export default function SubscribeDialog() {
                   country="us"
                   value={values.number}
                   onChange={(number, country) => {
+                    /* eslint-disable no-param-reassign */
                     values.number = `+${number}`;
                     values.countryCode = country.countryCode;
                     values.countryDialCode = country.dialCode;
                     values.countryName = country.name;
+                    /* eslint-enable no-param-reassign */
                   }}
                 />
                 <DialogActions>

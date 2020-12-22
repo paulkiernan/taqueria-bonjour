@@ -29,7 +29,7 @@ const SignupSchema = Yup.object().shape({
 
 export default function SubscribeDialog() {
   // const apiEndpoint = "http://localhost:8080"
-  const apiEndpoint = 'http://bonjour.paulynomial.com/api';
+  const apiEndpoint = 'https://bonjour.paulynomial.com/api';
 
   const [open, setOpen] = React.useState(false);
 

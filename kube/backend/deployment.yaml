@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: ghcr.io/paulkiernan/taqueria-bonjour-backend:1.0.1
+        image: ghcr.io/paulkiernan/taqueria-bonjour-backend:1.0.2
         imagePullPolicy: Always
         env:
         - name: FLASK_APP

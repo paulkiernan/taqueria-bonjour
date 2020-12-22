@@ -10,6 +10,6 @@ RUN pip install -r /tmp/requirements.txt
 RUN mkdir /storage
 
 WORKDIR /src
-COPY taqueria_bonjour /src/
+COPY taqueria_bonjour /src/taqueria_bonjour
 
 CMD ["waitress-serve", "--call", "taqueria_bonjour:main"]

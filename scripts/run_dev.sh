@@ -15,5 +15,5 @@ docker run \
     -e TWILIO_AUTH_TOKEN=$(sops -d --extract '["auth_token"]' secrets/twilio.yaml) \
     -e TWILIO_ORIGIN_NUMBER=$(sops -d --extract '["origin_number"]' secrets/twilio.yaml) \
     -v ${REPO_ROOT_DIR}:/src/ \
-    -it taqueria-bonjour:latest \
+    -it taqueria-bonjour-backend:latest \
         flask run --host=0.0.0.0

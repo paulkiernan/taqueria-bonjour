@@ -92,9 +92,8 @@ def add():
     u = User(
         name=post_data["name"],
         phone_number=PhoneNumber(
-            post_data["number"],
-            post_data["code"].upper()
-        )
+            post_data["number"], post_data["code"].upper()
+        ),
     )
     db.session.add(u)
 
@@ -102,7 +101,10 @@ def add():
         db.session.commit()
     except IntegrityError:
         db.session.rollback()
-        return {"message": "That name or number already exists!", "status": "error"}
+        return {
+            "message": "That name or number already exists!",
+            "status": "error",
+        }
 
     return {"message": f"Successfully added {u.name}!", "status": "success"}
 

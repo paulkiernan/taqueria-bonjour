@@ -4,7 +4,7 @@
 import requests
 
 numbers = {
-    'Paul': ("+16463696726", "US"),
+    "Paul": ("+16463696726", "US"),
 }
 
 if __name__ == "__main__":

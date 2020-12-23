@@ -7,7 +7,7 @@ import SubscribeDialog from './components/SubscribeDialog';
 import { initGA, PageView } from './components/Tracking';
 
 import './App.css';
-import logo from './taco.svg';
+import logo from './media/santa-taco-web.svg';
 
 initGA('UA-41647925-5');
 

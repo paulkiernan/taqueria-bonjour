@@ -10,6 +10,6 @@ docker run \
     --rm \
     -v ${REPO_ROOT_DIR}/frontend:/src \
     -v /src/node_modules \
-    -p 3000:3000 \
+    -p 3000:80 \
     -e CHOKIDAR_USEPOLLING=true \
     -it taqueria-bonjour-frontend:latest

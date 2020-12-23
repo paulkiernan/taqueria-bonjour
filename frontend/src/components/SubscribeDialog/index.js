@@ -29,7 +29,7 @@ const SignupSchema = Yup.object().shape({
 
 export default function SubscribeDialog() {
   // const apiEndpoint = "http://localhost:8080"
-  const apiEndpoint = 'https://bonjour.paulynomial.com/api';
+  const apiEndpoint = process.env.REACT_APP_BACKEND_API_URL;
 
   const [open, setOpen] = React.useState(false);
 
@@ -73,7 +73,6 @@ export default function SubscribeDialog() {
         return 'Success';
       })
       .catch((error) => {
-        console.log(error);
         actions.setStatus(['error', 'Error submitting information to server!']);
         Exception(error, true);
         actions.setSubmitting(false);

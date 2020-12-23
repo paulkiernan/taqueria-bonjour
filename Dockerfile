@@ -11,5 +11,6 @@ RUN mkdir /storage
 
 WORKDIR /src
 COPY taqueria_bonjour /src/taqueria_bonjour
+COPY migrations /src/migrations
 
 CMD ["waitress-serve", "--call", "taqueria_bonjour:main"]

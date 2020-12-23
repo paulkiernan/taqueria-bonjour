@@ -5,7 +5,7 @@ import logging
 import random
 from collections import Counter
 
-from flask import request, render_template
+from flask import request
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy_utils import PhoneNumber
@@ -78,9 +78,17 @@ def sms():
 
 
 @app.route("/bonjour", methods=["GET"])
-def meow():
+def bonjour():
     for user in User.query.all():
-        _send_message(twilio_client, user.name, user.phone_number.e164)
+        try:
+            _send_message(twilio_client, user.name, user.phone_number.e164)
+            user.sends += 1
+        except Exception:
+            logging.exception(
+                f"Error sending message to {user.name} @ {user.phone_number.e164}"
+            )
+            user.delivery_errors += 1
+    db.session.commit()
     return "Bonjours sent."
 
 
@@ -112,28 +120,33 @@ def add():
 @app.route("/team", methods=["GET"])
 def team():
     return {
-        "data": [
-            {
-                "id": user.id,
-                "name": user.name,
-                "phone_number": user.phone_number.e164,
-            }
-            for user in User.query.all()
-        ]
+        "data": [user for user in User.query.all()],
     }
 
 
 @app.route("/speak", methods=["POST"])
 def speak():
     number = request.form.get("From")
-    response = VoiceResponse()
+    logging.info("Received voice call from: {0}".format(number))
+    db.session.commit()
+
     try:
-        name = (
-            User.query.filter_by(phone_number=PhoneNumber(number, "US"))
-            .one()
-            .name
-        )
+        user = User.query.filter_by(
+            phone_number=PhoneNumber(number, "US")
+        ).one()
+        user.responses += 1
+
+        try:
+            db.session.commit()
+        except Exception:
+            logging.exception("error committing response inc")
+
+        name = user.name
+
     except NoResultFound:
         name = "stranger"
+
+    response = VoiceResponse()
     response.say("Bonjour, {0}!".format(name))
+
     return str(response)

@@ -21,8 +21,8 @@ spec:
         imagePullPolicy: Always
         env:
         - name: REACT_APP_BACKEND_API_URL
-          value: https://bonjour.paulynomial.com/api
+          value: "https://bonjour.paulynomial.com/api"
         - name: REACT_APP_GOOGLE_ANALYTICS_ENABLE_DEBUG
-          value: false
+          value: "false"
         ports:
         - containerPort: 80

@@ -20,6 +20,14 @@ spec:
         backend:
           serviceName: backend
           servicePort: 8080
+  - host: taqueriabonjour.com
+    http:
+      paths:
+      - path: /api(/|$)(.*)
+        pathType: Prefix
+        backend:
+          serviceName: backend
+          servicePort: 8080
   tls:
   - hosts:
     - bonjour.paulynomial.com

@@ -25,18 +25,14 @@ def upgrade():
     op.rename_table("user", "users")
 
     with op.batch_alter_table("users", schema=None) as batch_op:
-        batch_op.add_column(
-            sa.Column("delivery_errors", sa.Integer(), nullable=True)
-        )
+        batch_op.add_column(sa.Column("delivery_errors", sa.Integer(), nullable=True))
         batch_op.add_column(sa.Column("deleted", sa.Boolean(), nullable=True))
         batch_op.create_index(
             batch_op.f("ix_users__phone_number"),
             ["_phone_number"],
             unique=True,
         )
-        batch_op.create_index(
-            batch_op.f("ix_users_name"), ["name"], unique=True
-        )
+        batch_op.create_index(batch_op.f("ix_users_name"), ["name"], unique=True)
 
 
 def downgrade():
@@ -52,6 +48,4 @@ def downgrade():
 
     with op.batch_alter_table("user", schema=None) as batch_op:
         batch_op.create_index("ix_user_name", ["name"], unique=1)
-        batch_op.create_index(
-            "ix_user__phone_number", ["_phone_number"], unique=1
-        )
+        batch_op.create_index("ix_user__phone_number", ["_phone_number"], unique=1)

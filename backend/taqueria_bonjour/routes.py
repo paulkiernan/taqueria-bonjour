@@ -50,18 +50,14 @@ def healthcheck():
 def sms():
 
     number = request.form.get("From")
-    responder = User.query.filter_by(
-        phone_number=PhoneNumber(number, "US")
-    ).one()
+    responder = User.query.filter_by(phone_number=PhoneNumber(number, "US")).one()
     logging.info("Received message from: {0}".format(number))
     responder.responses += 1
     db.session.commit()
 
     resp = MessagingResponse()
     message = random.choice(
-        SPECIAL_RESPONSES
-        if responder.responses % 5 == 0
-        else POTENTIAL_RESPONSES
+        SPECIAL_RESPONSES if responder.responses % 5 == 0 else POTENTIAL_RESPONSES
     )
     logging.info("That person is: {0}".format(responder.name))
 
@@ -99,9 +95,7 @@ def add():
 
     u = User(
         name=post_data["name"],
-        phone_number=PhoneNumber(
-            post_data["number"], post_data["code"].upper()
-        ),
+        phone_number=PhoneNumber(post_data["number"], post_data["code"].upper()),
     )
     db.session.add(u)
 
@@ -131,9 +125,7 @@ def speak():
     db.session.commit()
 
     try:
-        user = User.query.filter_by(
-            phone_number=PhoneNumber(number, "US")
-        ).one()
+        user = User.query.filter_by(phone_number=PhoneNumber(number, "US")).one()
         user.responses += 1
 
         try:

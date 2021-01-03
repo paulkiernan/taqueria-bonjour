@@ -4,7 +4,11 @@ set -eu
 
 REPO_ROOT_DIR=$(git rev-parse --show-toplevel)
 
-docker build -t taqueria-bonjour-backend:latest "$REPO_ROOT_DIR"
+docker \
+    build \
+    -t taqueria-bonjour-backend:latest \
+    "$REPO_ROOT_DIR/backend" \
+    --file backend/Dockerfile
 
 docker run \
     --rm \

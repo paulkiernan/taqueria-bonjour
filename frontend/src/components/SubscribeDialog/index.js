@@ -29,7 +29,8 @@ const SignupSchema = Yup.object().shape({
 
 export default function SubscribeDialog() {
   // const apiEndpoint = "http://localhost:8080"
-  const apiEndpoint = process.env.REACT_APP_BACKEND_API_URL;
+  // const apiEndpoint = process.env.REACT_APP_BACKEND_API_URL;
+  const apiEndpoint = "api"
 
   const [open, setOpen] = React.useState(false);
 

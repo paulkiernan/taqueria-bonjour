@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:15.4.0-alpine3.10
+FROM node:16.8.0-alpine3.10
 
 LABEL org.opencontainers.image.source=https://github.com/paulkiernan/taqueria-bonjour
 

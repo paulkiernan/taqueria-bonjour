@@ -4,10 +4,8 @@ WORKDIR /src
 
 # Build frontend
 ENV PATH /src/node_modules/.bin:$PATH
-COPY package.json ./
-COPY yarn.lock ./
-RUN yarn install
 COPY . ./
+RUN yarn install
 RUN yarn build
 
 # Production slim container

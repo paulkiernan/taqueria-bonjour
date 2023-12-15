@@ -48,7 +48,6 @@ def healthcheck():
 
 @app.route("/sms", methods=["GET", "POST"])
 def sms():
-
     number = request.form.get("From")
     responder = User.query.filter_by(phone_number=PhoneNumber(number, "US")).one()
     logging.info("Received message from: {0}".format(number))
@@ -90,7 +89,6 @@ def bonjour():
 
 @app.route("/add", methods=["POST"])
 def add():
-
     post_data = request.get_json()
 
     u = User(

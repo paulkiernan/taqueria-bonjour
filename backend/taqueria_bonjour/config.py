@@ -5,7 +5,6 @@ import os
 
 
 class Config(object):
-
     # SQLite
     if os.environ.get("DATABASE_URL"):
         SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")

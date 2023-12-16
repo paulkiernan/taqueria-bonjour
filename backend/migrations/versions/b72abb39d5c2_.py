@@ -17,7 +17,6 @@ depends_on = None
 
 
 def upgrade():
-
     with op.batch_alter_table("user", schema=None) as batch_op:
         batch_op.drop_index("ix_user__phone_number")
         batch_op.drop_index("ix_user_name")
@@ -36,7 +35,6 @@ def upgrade():
 
 
 def downgrade():
-
     with op.batch_alter_table("users", schema=None) as batch_op:
         batch_op.drop_index(batch_op.f("ix_users_name"))
         batch_op.drop_index(batch_op.f("ix_users__phone_number"))

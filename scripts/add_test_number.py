@@ -8,7 +8,6 @@ numbers = {
 }
 
 if __name__ == "__main__":
-
     for _name, (_number, _code) in numbers.items():
         req = requests.post(
             "http://localhost:8080/add",
